@@ -1,7 +1,5 @@
 .DS_Store
-node_modules
-/public
-/src
+node_modulesF
 
 # local env files
 .env.local

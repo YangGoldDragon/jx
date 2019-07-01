@@ -3,7 +3,7 @@
 ## Vue移动端电商类项目
 
 ### 技术栈
-es6 stylus vue vue-router vuex axios cube-ui easy-mock
+es6 stylus vue vue-router vuex vue-cli3 axios cube-ui easy-mock
 
 #### 项目开发中遇到的重点难点
 1.购物车数据的实时增删改查。

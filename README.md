@@ -19,3 +19,5 @@ vue vue-router axios vuex cube-ui es6 easy-mock stylus
 6.路由使用history模式有坑，需要后端设置，不然打包项目，页面空白。同时baseUrl设置为相对路径"./"。
 
 7.页面刷新，vuex数据丢失，使用插件vuePersistedState保存页面状态到localstorage或者sessionstorage。
+
+8.所有访问接口都使用easy-mock模拟后端数据接口，并通过easy-mock提供的函数功能完成登录和注册页面的逻辑。

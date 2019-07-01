@@ -74,7 +74,17 @@ export default {
       }
     }
   },
-  created() {},
+  created() {
+    //获取购物车的位置
+    this.$nextTick(function() {
+      let shopCartPosition = document
+        .getElementsByClassName("cubeic-mall")[0]
+        .getBoundingClientRect();
+
+      //购物车位置存入vuex
+      this.setShopCartPosition(shopCartPosition);
+    });
+  },
   activated() {
     switch (this.$route.path) {
       case "/":

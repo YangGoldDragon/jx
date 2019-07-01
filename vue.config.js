@@ -1,5 +1,5 @@
 module.exports = {
-  configureWebpack: {},
+  baseUrl: "./",
   css: {
     loaderOptions: {
       stylus: {

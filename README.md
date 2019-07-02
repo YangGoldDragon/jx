@@ -1,5 +1,7 @@
 # jx
 
+# ![jx](https://github.com/YangGoldDragon/jx/blob/master/public/jx.png?raw=true)
+
 ## Vue移动端电商类项目
 
 ### 技术栈

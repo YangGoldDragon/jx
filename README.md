@@ -10,7 +10,7 @@ es6 stylus vue vue-router vuex vue-cli3 axios cube-ui easy-mock
 
 2.购物车小球动画，小球位置随机需要实时改变，tranform translate的设置使用贝塞尔曲线函数
 
-3.使用keep-alive保存分类页面的滚动条位置，使用keep-alive会将组件缓存至内存中，那么页面数据就会产生混乱，需要在activated和deactivated生命周期中进行操作。
+3.使用keep-alive保存分类页面的滚动条位置，使用keep-alive会将组件缓存至内存中，那么某些页面数据就会产生混乱，需要在activated和deactivated生命周期中进行修正。
 
 4.使用axios拦截http请求，加入token进行身份验证
 

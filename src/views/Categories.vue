@@ -141,8 +141,6 @@ export default {
     ballAnimation(el) {
       //获取小球起点终点
       let { top, left } = el.getBoundingClientRect();
-      console.log(this.shopCartPosition.top);
-      console.log(this.shopCartPosition.left);
       let endTop = this.shopCartPosition.top - top, //这个地方有问题
         endLeft = this.shopCartPosition.left - left + 40;
       let _this = this;

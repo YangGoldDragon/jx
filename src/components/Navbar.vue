@@ -56,7 +56,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["setShopCartPosition"]),
+    ...mapActions(["shopCartPosition"]),
     changeHandler(label) {
       switch (label) {
         case "首页":
@@ -74,17 +74,6 @@ export default {
       }
     }
   },
-  created() {
-    //获取购物车的位置
-    this.$nextTick(function() {
-      let shopCartPosition = document
-        .getElementsByClassName("cubeic-mall")[0]
-        .getBoundingClientRect();
-
-      //购物车位置存入vuex
-      this.setShopCartPosition(shopCartPosition);
-    });
-  },
   activated() {
     switch (this.$route.path) {
       case "/":
@@ -100,28 +89,6 @@ export default {
         this.curPage = "我的";
         break;
     }
-  },
-  deactivated() {
-    //获取购物车的位置
-    this.$nextTick(function() {
-      let shopCartPosition = document
-        .getElementsByClassName("cubeic-mall")[0]
-        .getBoundingClientRect();
-
-      //购物车位置存入vuex
-      this.setShopCartPosition(shopCartPosition);
-    });
-  },
-  mounted() {
-    //获取购物车的位置
-    this.$nextTick(function() {
-      let shopCartPosition = document
-        .getElementsByClassName("cubeic-mall")[0]
-        .getBoundingClientRect();
-
-      //购物车位置存入vuex
-      this.setShopCartPosition(shopCartPosition);
-    });
   }
 };
 </script>
@@ -155,3 +122,4 @@ export default {
         justify-content center
         align-items center
 </style>
+https://github.com/YangGoldDragon/jx/blob/master/public/jx.png?raw=true

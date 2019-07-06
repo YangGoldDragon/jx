@@ -6,8 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token: "",
-    cartData: [],
-    shopCartPosition: {}
+    cartData: []
   },
   mutations: {
     setToken(state, token) {
@@ -51,9 +50,6 @@ export default new Vuex.Store({
     clearCartData(state) {
       state.cartData = [];
     },
-    setShopCartPosition(state, shopCartPosition) {
-      state.shopCartPosition = shopCartPosition;
-    },
     signout(state) {
       state.token = "";
     }
@@ -71,9 +67,6 @@ export default new Vuex.Store({
     clearCartData(context) {
       context.commit("clearCartData");
     },
-    setShopCartPosition(context, shopCartPosition) {
-      context.commit("setShopCartPosition", shopCartPosition);
-    },
     resetCartData(context, cartData) {
       context.commit("resetCartData", cartData);
     },
@@ -86,7 +79,7 @@ export default new Vuex.Store({
       return state.cartData;
     },
     curToken: state => {
-      return state.token
+      return state.token;
     }
   },
   plugins: [createPersistedState()]

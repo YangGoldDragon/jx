@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="categories-wrap">
     <div class="categories-container">
       <div class="left-scroll-bar">
         <cube-scroll class="left-scroll">
@@ -27,12 +27,7 @@
               v-for="(item, index) of activeCategories.data"
               :key="index"
             >
-              <img
-                class="goodsImg"
-                :src="item.imgUrl"
-                alt=""
-                @load.once="loadImg"
-              />
+              <img class="goodsImg" :src="item.imgUrl" alt="" />
               <span class="goodsName"
                 >{{ item.name }}
                 <i
@@ -61,7 +56,7 @@
 
 <script>
 import Navbar from "@/components/Navbar";
-import { mapState, mapActions } from "vuex";
+import { mapActions } from "vuex";
 export default {
   name: "Categories",
   data() {
@@ -78,9 +73,6 @@ export default {
       ]
     };
   },
-  computed: {
-    ...mapState(["shopCartPosition"])
-  },
   components: {
     Navbar
   },
@@ -93,7 +85,6 @@ export default {
     }).then(res => {
       if (res.data.success) {
         this.categories = res.data.data;
-        console.log(res.data.data);
         this.activeCategories = this.categories[0];
       } else {
         console.log("请求数据失败，请重新请求！");
@@ -107,7 +98,7 @@ export default {
       console.log(label);
     },
     changeHandler(label) {
-      this.loadImg();
+      this.$refs.scroll.scrollTo(0, 0);
       // if you clicked different tab, this methods can be emitted
       for (let i of this.categories) {
         if (label === i.name) {
@@ -116,7 +107,6 @@ export default {
       }
     },
     handleAddCartData(e) {
-      this.loadImg();
       //获取被点击的dom元素位置,小球动画开始
       const el = e.target;
       if (el.className === "cubeic-add") {
@@ -132,46 +122,35 @@ export default {
         });
       }
     },
-    loadImg() {
-      // reset better-scroll'postion
-      this.$refs.scroll.scrollTo(0, 0);
-      // you need to caculate scroll-content height when your dom has changed in nextTick
-      this.$refs.scroll.refresh();
-    },
     ballAnimation(el) {
       //获取小球起点终点
       let { top, left } = el.getBoundingClientRect();
-      let endTop = this.shopCartPosition.top - top, //这个地方有问题
-        endLeft = this.shopCartPosition.left - left + 40;
+      let endTop = window.innerHeight - top,
+        endLeft = window.innerWidth * 0.7 - left - 20;
       let _this = this;
       //遍历小球
-      this.$nextTick(function() {
-        for (let i = 0; i < this.balls.length; i++) {
-          if (!this.balls[i].show) {
-            //将小球放到起点位置
-            this.balls[i].show = true;
-            this.$refs.balls[i].style.top = top + "px";
-            this.$refs.balls[i].style.left = left + "px";
+      for (let i = 0; i < this.balls.length; i++) {
+        if (!this.balls[i].show) {
+          //将小球放到起点位置
+          setTimeout(function() {
+            _this.balls[i].show = true;
+            _this.$refs.balls[i].style.top = top + "px";
+            _this.$refs.balls[i].style.left = left + "px";
             //小球移动到终点位置
             setTimeout(function() {
               _this.$refs.balls[
                 i
               ].style.transform = `translate3d(${endLeft}px, ${endTop}px, 0)`;
+              //小球回到起点位置
               setTimeout(function() {
-                _this.balls[i].show = false;
-                //小球回到起点位置
                 _this.$refs.balls[i].style.transform = `translate3d(0, 0, 0)`;
+                _this.balls[i].show = false;
               }, 600);
             });
-
-            return;
-          }
+          });
         }
-      });
+      }
     }
-  },
-  activated() {
-    this.loadImg();
   }
 };
 </script>
@@ -190,8 +169,10 @@ export default {
 .categories-container
   display flex
   .right-scroll-bar
-    height 80vh
+    height calc(100vh - 50px)
     width 70%
+    padding 30px 0 60px
+    box-sizing border-box
     .right-scroll
       .right-scroll-ul
         display flex
@@ -206,6 +187,8 @@ export default {
           overflow hidden
           margin-bottom 15px
           .goodsImg
+            width 100px
+            height 100px
             padding-bottom 10px
           .goodsName
             padding-bottom 5px
@@ -218,9 +201,11 @@ export default {
             font-size 16px
             padding-left 10px
   .left-scroll-bar
-    height 80vh
+    height calc(100vh - 50px)
     width 30%
     background-color #f8f8f8
+    padding 30px 0 80px
+    box-sizing border-box
     .left-scroll
       .cube-tab-bar
         display flex
